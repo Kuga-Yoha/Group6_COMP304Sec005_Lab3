@@ -10,13 +10,10 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.*
 
-
 import android.content.Context
 import android.os.Build
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.WindowManager
-import androidx.core.content.ContextCompat.getSystemService
 
 class Exercise1 : AppCompatActivity() {
 
@@ -41,35 +38,21 @@ class Exercise1 : AppCompatActivity() {
     private var lineColor = ""
     private val strokeWidth = 20
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise1)
-
-
 
         // create paint for the drawing
         paint = Paint()
         paint!!.strokeWidth = strokeWidth.toFloat()
 
-        // creating a bitmap as content view for the image
-        /*
-        bitmap = Bitmap.createBitmap(
-            windowManager.defaultDisplay.width, windowManager.defaultDisplay.height, Bitmap.Config.ARGB_8888
-        )
-        */
-
         var screenHeight = 0
         var screenWidth = 0
-
-
 
         val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val metrics = DisplayMetrics()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val windowMetrics = windowManager.currentWindowMetrics
-            // Gets all excluding insets
             val bounds = windowMetrics.bounds
             screenWidth = bounds.width()
             screenHeight = bounds.height()
@@ -79,15 +62,7 @@ class Exercise1 : AppCompatActivity() {
             screenWidth = metrics.widthPixels
         }
 
-
         bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
-
-
-        //bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
-
-
-        bitmap = Bitmap.createBitmap(screenWidth, screenHeight, Bitmap.Config.ARGB_8888)
-
 
         // tell canvas about the content view
         canvas = Canvas(bitmap)
@@ -97,7 +72,7 @@ class Exercise1 : AppCompatActivity() {
         // setup the image view
         reusableImageView = findViewById<View>(R.id.imageViewForDrawing) as ImageView
 
-        // tell image view for the bitmap format/content
+        // tell the image view the bitmap format/content
         reusableImageView!!.setImageBitmap(bitmap)
         reusableImageView!!.visibility = View.VISIBLE
         xCoordText = findViewById<View>(R.id.xCoordEditText) as TextView
@@ -105,9 +80,6 @@ class Exercise1 : AppCompatActivity() {
 
         // setup line color selection
         setupLineColor()
-
-
-
     }
 
     fun clearCanvas(v: View?) {
@@ -127,19 +99,17 @@ class Exercise1 : AppCompatActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            // Handle back button press
+            // Handle back button press by finishing the current activity
+            finish()
             return true
         }
 
-        // Handle arrow key events
         if (!isArrowKeys(keyCode)) {
             return super.onKeyDown(keyCode, event)
         }
 
-        // Check if line thickness changed
         checkLineThickness()
 
-        // Check if the user already chose a color
         if (lineColor == "" || lineColor.isEmpty()) {
             Toast.makeText(applicationContext, "Please select line color", Toast.LENGTH_SHORT).show()
             return false
@@ -192,7 +162,6 @@ class Exercise1 : AppCompatActivity() {
         val selectedItemPosition = lineThicknessSpinner.selectedItemPosition
         val strokeWidthValue = selectedItemPosition.toString().toInt()
 
-        //Log.d("Stroked With Value : ", strokeWidthValue.toString())
         if (strokeWidth != strokeWidthValue) {
             paint!!.strokeWidth = strokeWidthValue.toFloat()
         }
@@ -207,11 +176,9 @@ class Exercise1 : AppCompatActivity() {
 
         if(!(rbRed.isChecked || rbGreen.isChecked || rbYellow.isChecked) ) return
 
-
         val xCoordString = xCoordText!!.text.toString()
         val yCoordString = yCoordText!!.text.toString()
 
-        // Handle the x value from edit view
         if (!xCoordString.isEmpty()) {
             val xFromEditView = xCoordText!!.text.toString().toInt()
             if (xFromEditView <= 10) {
@@ -224,7 +191,6 @@ class Exercise1 : AppCompatActivity() {
             }
         }
 
-        // Handle the y value from edit view
         if (!yCoordString.isEmpty()) {
             val yFromEditView = yCoordText!!.text.toString().toInt()
             if (yFromEditView <= 10) {
@@ -282,7 +248,6 @@ class Exercise1 : AppCompatActivity() {
     }
 
     private fun setupLineColor() {
-        // Create the radio group
         val lineColorRadioGrp = findViewById<RadioGroup>(R.id.lineColorRbGrp)
         lineColorRadioGrp.setOnCheckedChangeListener { group, checkedId ->
             val rbRed = findViewById<RadioButton>(R.id.redRadioBtn)
@@ -300,7 +265,4 @@ class Exercise1 : AppCompatActivity() {
             }
         }
     }
-
-
-
 }
