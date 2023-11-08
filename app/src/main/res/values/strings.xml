@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Group6_COMP304Sec005_Lab3</string>
+    <string name="main_activity_title">Select the exercise to demonstrate</string>
+
+
+    <string name="line_thickness">Line Thickness</string>
+    <string name="line_color">Line Color</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="yellow">Yellow</string>
+    <string name="arrow_keys">Arrow Keys</string>
+    <string name="arrow_up">arrow_up</string>
+    <string name="clear">Clear</string>
+    <string name="x">x =</string>
+    <string name="y">y =</string>
+
+
+    <string-array name="lineThicknessSize">
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="activities">
+
+        <item>Exercise 01</item>
+        <item>Exercise 02</item>
+        <item>Exercise 03</item>
+
+
+    </string-array>
+</resources>
