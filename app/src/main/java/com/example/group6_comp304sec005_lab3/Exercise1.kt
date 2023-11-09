@@ -160,7 +160,9 @@ class Exercise1 : AppCompatActivity() {
     private fun checkLineThickness() {
         val lineThicknessSpinner = findViewById<Spinner>(R.id.lineThicknessSpinner)
         val selectedItemPosition = lineThicknessSpinner.selectedItemPosition
-        val strokeWidthValue = selectedItemPosition.toString().toInt()
+        val strokeWidthFactor = 5 // Adjust this factor as needed
+
+        val strokeWidthValue = (selectedItemPosition + 1) * strokeWidthFactor
 
         if (strokeWidth != strokeWidthValue) {
             paint!!.strokeWidth = strokeWidthValue.toFloat()
